@@ -37,7 +37,7 @@
       let number_of_subjects = $("#number_of_subjects").val();
       let html = ''
       for (var i = 1; i <= number_of_subjects; i++) {
-        html += '<div class="mb-3"><label for="subject_' + i + '" class="form-label">Subject ' + i + '</label><input type="number" class="form-control" id="subject_' + i + '"></div>';
+        html += '<div class="mb-3"><label for="subject_' + i + '" class="form-label">Subject ' + i + '</label><input type="text" class="form-control" id="subject_' + i + '"></div>';
       }
       $("#fields").html(html);
     }
@@ -47,14 +47,17 @@
       let total = 0;
       for (let i = 1; i <= number_of_subjects; i++) {
         console.log($("#subject_" + i).val());
-        total += parseInt($("#subject_" + i).val());
+        total += parseFloat($("#subject_" + i).val());
       }
       // get total value from input
       let total_marks = parseInt($("#total").val());
       // set total to marks_obtained
       $("#marks_obtained").text(`Grand Total: ${total} out of ${total_marks}`);
       // calculate percentage and set to percentage
-      $("#percentage").text(`Percentage: ${total / total_marks * 100}%`);
+      let percentage = total / total_marks * 100;
+      // round percentage to 2 decimal places
+      percentage = percentage.toFixed(2);
+      $("#percentage").text(`Percentage: ${percentage}%`);
       return total;
     }
     // on keydown
